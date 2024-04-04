@@ -1,0 +1,11 @@
+# Ignoruj pliki z katalogu "node_modules"
+node_modules/
+
+# Ignoruj pliki z katalogu "dist"
+dist/
+
+# Ignoruj pliki z katalogu "dist"
+.parcel-cache/
+
+# Ignoruj pliki "package-lock.json"
+package-lock.json
