@@ -1,12 +1,12 @@
-import View from "./view";
+import View from './View';
 import icons from 'url:../../img/icons.svg';
 
-class resultsView extends View{
-  _parentElement = document.querySelector('.results')
-  _errorMessage = 'No recipes found for your query. Please try again.'
+class resultsView extends View {
+  _parentElement = document.querySelector('.results');
+  _errorMessage = 'No recipes found for your query. Please try again.';
   _message = '';
 
-  _generateMarkup(){
+  _generateMarkup() {
     return this._data.map(this._generateMarkupPriview).join('');
   }
 
@@ -23,7 +23,7 @@ class resultsView extends View{
           </div>
         </a>
       </li>
-    `
+    `;
   }
 }
 
