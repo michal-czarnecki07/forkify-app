@@ -34,6 +34,9 @@ export const loadRecepie = async function (id) {
     throw err;
   }
 };
+const persistBookmarks = function () {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+};
 
 export const loadSearchResuls = async function (query) {
   try {
@@ -72,10 +75,21 @@ export const updateServings = function (newServings) {
 export const addBookmark = function (recipe) {
   state.bookmarks.push(recipe);
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+  persistBookmarks();
 };
 
 export const deleteBookmark = function (id) {
   const index = state.bookmarks.findIndex(EL => EL.id === id);
   state.bookmarks.splice(index, 1);
   if (id === state.recipe.id) state.recipe.bookmarked = false;
+  persistBookmarks();
 };
+
+export const uploadRecipe = async function(newRecipe){
+
+}
+
+const init = function(){
+  const storage = localStorage.getItem('bookmarks');
+  if (storage) state.bookmarks = JSON.parse(storage);
+}

@@ -1,8 +1,8 @@
 import icons from 'url:../../img/icons.svg';
 import { Fraction } from 'fractional';
-import View from './View';
+import View from './view';
 
-class recipeView extends View {
+class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
   _errorMessage = 'We could not find that recipe. Please try another one.';
   _message = '';
@@ -136,4 +136,4 @@ class recipeView extends View {
   }
 }
 
-export default new recipeView();
+export default new RecipeView();
