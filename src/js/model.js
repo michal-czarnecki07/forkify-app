@@ -85,11 +85,24 @@ export const deleteBookmark = function (id) {
   persistBookmarks();
 };
 
-export const uploadRecipe = async function(newRecipe){
+export const uploadRecipe = async function (newRecipe) {
+  try {
+    const ingredients = Object.entries(newRecipe)
+    .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
+    .map(ing => {
+      const ingArr = ing[1].replaceAll(' ', '').split(',');
+      if (ingArr.length !== 3) throw new Error('Wrong ingredient format');
+      const [quantity, unit, description] = ingArr;
+      return { quantity: quantity ? +quantity : null, unit, description };
+    });
+  console.log(ingredients);
+  } catch (error) {
+    throw new Error(error);
+  }
 
-}
+};
 
-const init = function(){
+const init = function () {
   const storage = localStorage.getItem('bookmarks');
   if (storage) state.bookmarks = JSON.parse(storage);
-}
+};
