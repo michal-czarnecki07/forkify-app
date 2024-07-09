@@ -7,6 +7,9 @@ import ResultsView from './views/resultsView.js';
 import PaginationView from './views/paginationView.js';
 import BookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
+import recipeView from './views/recipeView.js';
+import { MODAL_CLOSE_SEC } from './config.js';
+import bookmarksView from './views/bookmarksView.js';
 
 const recipeContainer = document.querySelector('.recipe');
 
@@ -70,7 +73,17 @@ const controlAddBookamrk = function () {
 
 const controlAddRecipe = async function(newRecipe){
   try {
+    addRecipeView.renderSpinner();
     await model.uploadRecipe(newRecipe);
+    console.log(model.state.recipe);
+    recipeView.render(model.state.recipe)
+    addRecipeView.renderMessage();
+    bookmarksView.render(model.state.bookmarks);
+    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+    
+    setTimeout(function(){
+      addRecipeView.toggleWindow();
+    }, MODAL_CLOSE_SEC)
   } catch (error) {
     console.log(error);
     addRecipeView.renderError(error.message)
